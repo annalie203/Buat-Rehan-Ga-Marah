@@ -332,12 +332,13 @@
         heartContainer.appendChild(heart);
       }
 
-      // Tampilkan pesan maaf
-      const heartMessage = document.createElement('div');
-      heartMessage.className = 'heart-message';
-      heartMessage.innerText = "MAAF HARUSNNYA AK LEBIH PERHATIAN KE KAMU, MAAF CARA AK CARI PERHATIAN KMU SALAH HARUSNYA AK OPEN UP AJA :(";
-      heartMessage.style.display = 'block';
-      heartContainer.appendChild(heartMessage);
+   // Tampilkan pesan maaf
+const heartMessage = document.createElement('div');
+heartMessage.className = 'heart-message';
+heartMessage.innerHTML = "MAAF HARUSNNYA AK LEBIH PERHATIAN<br>KE KAMU, MAAF CARA AK CARI PERHATIAN KMU<br>SALAH HARUSNYA AK OPEN UP AJA :(";
+heartMessage.style.display = 'block';
+heartContainer.appendChild(heartMessage);
+
     }
 
     // Otomatis putar lagu saat halaman dimuat
