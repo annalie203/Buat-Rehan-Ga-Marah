@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For the Most Amazing Person</title>
+  <style>
+    body {
+      background-color: #d3d3d3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    /* Fade in-out animasi untuk teks pertama */
+    .fade-in-out {
+      font-size: 30px;
+      color: red;
+      animation: fadeInOut 6s forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Fade in untuk tulisan kedua */
+    .fade-in-big {
+      display: none;
+      font-size: 40px;
+      background: linear-gradient(to right, #ff007f, #3300ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: fadeIn 6s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Tombol pertama sebelum masuk kado */
+    .big-button {
+      display: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .big-button.clicked {
+      background-color: red;
+    }
+
+    /* Bagian kotak kado */
+    .gift-section {
+      display: none;
+      text-align: center;
+    }
+
+    .gift-box {
+      width: 200px;
+      height: 200px;
+      background-color: #f5f5dc;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .ribbon-horizontal, .ribbon-vertical {
+      position: absolute;
+      background-color: red;
+    }
+
+    .ribbon-horizontal {
+      width: 100%;
+      height: 20px;
+      top: 40%;
+    }
+
+    .ribbon-vertical {
+      width: 20px;
+      height: 100%;
+      left: 40%;
+    }
+
+    .ribbon-bow {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      border-radius: 50%;
+      top: 25%;
+      left: 25%;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Buket bunga */
+    .flower-bouquet {
+      display: none;
+      font-size: 50px;
+      color: red;
+    }
+
+    /* Tulisan kelap-kelip warna-warni */
+    .message {
+      display: none;
+      font-size: 18px;
+      animation: colorBlink 1s infinite;
+    }
+
+    @keyframes colorBlink {
+      0% {
+        color: red;
+      }
+      33% {
+        color: blue;
+      }
+      66% {
+        color: green;
+      }
+      100% {
+        color: yellow;
+      }
+    }
+
+    /* Tombol pilih maaf */
+    .buttons-section {
+      display: none;
+    }
+
+    .buttons-section button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: pink;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .small-text {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    /* Pesan setelah maaf */
+    .thank-you {
+      display: none;
+      margin-top: 10px;
+      font-size: 18px;
+      color: #ff1493;
+    }
+
+    /* Transisi ke halaman hati-hati */
+    .heart-container {
+      display: none;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #ffe4e1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 25% 100%, 0% 35%);
+      animation: fall 4s infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    .heart-message {
+      display: none;
+      font-size: 24px;
+      color: red;
+      margin-top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Tulisan fade in dan fade out pertama -->
+    <div class="fade-in-out">Disc, turn up the volume 🔊</div>
+
+    <!-- Tulisan fade in kedua -->
+    <div class="fade-in-big">Buat cowok paling ganteng menurut forbes 2024 dan anna e.l</div>
+
+    <!-- Button sebelum kotak kado -->
+    <button class="big-button" id="startButton">KLIK CINIII GANTENG <3</button>
+
+    <!-- Kotak kado dan isinya (belum muncul di awal) -->
+    <div class="gift-section">
+      <div class="gift-box" id="giftBox">
+        <div class="ribbon-horizontal"></div>
+        <div class="ribbon-vertical"></div>
+        <div class="ribbon-bow"></div>
+      </div>
+      <!-- Buket bunga muncul setelah kado dibuka -->
+      <div class="flower-bouquet" id="flowerBouquet">💐</div>
+
+      <!-- Tulisan kelap-kelip setelah kado terbuka -->
+      <div class="message" id="message">
+        BELI ES KRIM RASA VANILA,<br>
+        DI TAMBAH TOPPING BIAR SERASI,<br>
+        MAAFIN AK YG SUKA BIKIN DRAMA,<br>
+        AYO BAIKAN PLEASE, JANGAN TINGGALIN AK LAGI
+      </div>
+
+      <!-- Tombol maaf dan baikan -->
+      <div class="buttons-section" id="buttonsSection">
+        <div class="small-text">harus pilih, harus klik</div>
+        <button id="forgiveButton">Iya di maapin</button>
+        <button id="reconcileButton">Iya baikan</button>
+      </div>
+
+      <!-- Pesan terima kasih setelah maaf -->
+      <div class="thank-you" id="thankYou">MAACI BANYAK<3, BUT WAIT</div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="backgroundMusic" autoplay loop>
+      <source src="./music/NARUTO and HINATA-[AudioTrimmer.com].mp3 type="audio/mpeg">
+    </audio>
+
+  </div>
+
+  <script>
+    // Fade in-out tulisan pertama
+    setTimeout(() => {
+      document.querySelector('.fade-in-out').style.display = 'none';
+      document.querySelector('.fade-in-big').style.display = 'block';
+
+      // Tampilkan tombol setelah fade in kedua selesai
+      setTimeout(() => {
+        document.querySelector('.big-button').style.display = 'inline-block';
+      }, 6000); 
+    }, 6000);
+
+    // Button transisi ke kotak kado
+    document.getElementById('startButton').addEventListener('click', function() {
+      this.classList.add('clicked');
+      setTimeout(() => {
+        document.querySelector('.fade-in-big').style.display = 'none';
+        document.querySelector('.big-button').style.display = 'none';
+        document.querySelector('.gift-section').style.display = 'block';
+      }, 500);
+    });
+
+    // Event listener untuk kotak kado
+    document.getElementById('giftBox').addEventListener('click', function() {
+      this.style.display = 'none'; // Sembunyikan kado
+      document.getElementById('flowerBouquet').style.display = 'block'; // Tampilkan buket bunga
+      document.getElementById('message').style.display = 'block'; // Tampilkan pesan kelap-kelip
+      setTimeout(() => {
+        document.getElementById('buttonsSection').style.display = 'block'; // Tampilkan tombol
+      }, 1000); // 1 detik setelah pesan muncul
+    });
+
+    // Event listener untuk tombol pilihan
+    document.getElementById('forgiveButton').addEventListener('click', function() {
+      displayThankYouMessage();
+    });
+
+    document.getElementById('reconcileButton').addEventListener('click', function() {
+      displayThankYouMessage();
+    });
+
+    // Fungsi untuk menampilkan pesan terima kasih dan transisi ke halaman hati-hati
+    function displayThankYouMessage() {
+      document.getElementById('thankYou').style.display = 'block'; // Tampilkan pesan terima kasih
+      setTimeout(() => {
+        document.getElementById('thankYou').style.display = 'none'; // Sembunyikan pesan terima kasih
+        transitionToHeartPage(); // Transisi ke halaman hati-hati
+      }, 3000); // 3 detik tampil
+    }
+
+    // Fungsi transisi ke halaman hati-hati
+    function transitionToHeartPage() {
+      document.querySelector('.gift-section').style.display = 'none'; // Sembunyikan bagian kado
+      const heartContainer = document.createElement('div'); // Buat kontainer hati
+      heartContainer.className = 'heart-container';
+      document.body.appendChild(heartContainer);
+      heartContainer.style.display = 'block'; // Tampilkan kontainer hati
+
+      // Tambah hati
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw'; // Acak posisi horizontal
+        heart.style.animationDuration = Math.random() * 2 + 3 + 's'; // Acak durasi jatuh
+        heartContainer.appendChild(heart);
+      }
+
+      // Tampilkan pesan maaf
+      const heartMessage = document.createElement('div');
+      heartMessage.className = 'heart-message';
+      heartMessage.innerText = "MAAF HARUSNNYA AK LEBIH PERHATIAN KE KAMU, MAAF CARA AK CARI PERHATIAN KMU SALAH HARUSNYA AK OPEN UP AJA :(";
+      heartMessage.style.display = 'block';
+      heartContainer.appendChild(heartMessage);
+    }
+
+    // Otomatis putar lagu saat halaman dimuat
+    window.onload = function() {
+      document.getElementById('backgroundMusic').play();
+    };
+  </script>
+</body>
+</html>
+
+
+
+
